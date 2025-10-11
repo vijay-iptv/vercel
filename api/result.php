@@ -75,5 +75,41 @@ echo '#EXTM3U x-tvg-url="https://live.dinesh29.com.np/epg/jiotvplus/master-epg.x
 echo $output . PHP_EOL . PHP_EOL;
 echo implode("\n", $lines);
 
+$response = @file_get_contents("https://arunjunan20.github.io/My-IPTV/");
+$response = preg_replace(
+    '/tvg-logo\s*=\s*"https:\/\/yt3\.googleusercontent\.com\/GJVGgzRXxK1FDoUpC8ztBHPu81PMnhc8inodKtEckH-rykiYLzg93HUQIoTIirwORynozMkR=s900-c-k-c0x00ffffff-no-rj"/',
+    'tvg-logo="https://raw.githubusercontent.com/vijay-iptv/logos/refs/heads/main/Zee_Tamil_News.png"',
+    $response
+);
+$response = preg_replace(
+    '/https:\/\/d229kpbsb5jevy\.cloudfront\.net\/timesplay\/content\/common\/logos\/channel\/logos\/wthfwe\.jpeg/',
+    'https://mediaready.videoready.tv/tatasky-epg/image/fetch/f_auto,fl_lossy,q_auto,h_250,w_250/https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/imageContent-12095-j9ooixfs-v1/imageContent-12095-j9ooixfs-m1.png',
+    $response
+);
+$response = preg_replace(
+    '/https:\/\/images\.now-tv\.com\/shares\/channelPreview\/img\/en_hk\/color\/ch115_160_115/',
+    'https://raw.githubusercontent.com/vijay-iptv/logos/refs/heads/main/HBO.png',
+    $response
+);
+$response = preg_replace(
+    '/https:\/\/resizer-acm\.eco\.astro\.com\.my\/tr:w-256,q:85\/https:\/\/divign0fdw3sv\.cloudfront\.net\/Images\/ChannelLogo\/contenthub\/337_144\.png/',
+    'https://raw.githubusercontent.com/vijay-iptv/logos/refs/heads/main/Cinemax.png',
+    $response
+);
+$response = preg_replace(
+    '/https:\/\/d229kpbsb5jevy\.cloudfront\.net\/timesplay\/content\/common\/logos\/channel\/logos\/vunjev\.jpeg/',
+    'https://raw.githubusercontent.com/vijay-iptv/logos/refs/heads/main/MNX_HD.png',
+    $response
+);
+$response = preg_replace(
+    '/https:\/\/d229kpbsb5jevy\.cloudfront\.net\/timesplay\/content\/common\/logos\/channel\/logos\/leazcc\.jpeg/',
+    'https://mediaready.videoready.tv/tatasky-epg/image/fetch/f_auto,fl_lossy,q_auto,h_250,w_250/https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/imageContent-826-j5m9kx5c-v1/imageContent-826-j5m9kx5c-m1.png',
+    $response
+);
+echo $response;
+
+$response = @file_get_contents("https://raw.githubusercontent.com/vijay-iptv/tamil/refs/heads/main/iptv.m3u");
+curl_close($ch);
+echo $response;
 exit;
 ?>
