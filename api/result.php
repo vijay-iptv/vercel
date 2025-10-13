@@ -109,7 +109,6 @@ $response = preg_replace(
 echo $response;
 
 $response = @file_get_contents("https://raw.githubusercontent.com/vijay-iptv/tamil/refs/heads/main/iptv.m3u");
-curl_close($ch);
 echo $response;
 exit;
 ?>
