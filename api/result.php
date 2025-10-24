@@ -140,6 +140,11 @@ $response = preg_replace(
     'https://mediaready.videoready.tv/tatasky-epg/image/fetch/f_auto,fl_lossy,q_auto,h_250,w_250/https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/imageContent-826-j5m9kx5c-v1/imageContent-826-j5m9kx5c-m1.png',
     $response
 );
+$response = preg_replace(
+    '/https:\/\/d229kpbsb5jevy\.cloudfront\.net\/tv\/150\/150\/bnw\/isai-aruvi-black\.png/',
+    'https://raw.githubusercontent.com/vijay-iptv/logos/refs/heads/main/Isai_Aruvi.png',
+    $response
+);
 echo $response;
 
 $response = @file_get_contents("https://raw.githubusercontent.com/vijay-iptv/tamil/refs/heads/main/iptv.m3u");
