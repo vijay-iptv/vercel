@@ -6,11 +6,13 @@ date_default_timezone_set('Asia/Kolkata');
 $jio_m3u_url = 'https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u';
 $zee5_m3u_url = 'https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u';
 $json_url = 'https://raw.githubusercontent.com/vijay-iptv/JSON/refs/heads/main/jiodata.json';
+$tpjson = 'https://api.ygxworld.workers.dev/fetcher.json';
 
 // Load M3U and JSON
 $jiom3u = file_get_contents($jio_m3u_url);
 $zee5m3u = file_get_contents($zee5_m3u_url);
 $json = json_decode(file_get_contents($json_url), true);
+$data = json_decode(file_get_contents($tpjson), true);
 if (preg_match('/__hdnea__=[^"}]+/', $jiom3u, $matches)) {
     $hdnea = $matches[0];
 } else {
@@ -75,6 +77,38 @@ echo '#EXTM3U x-tvg-url="https://live.dinesh29.com.np/epg/jiotvplus/master-epg.x
 echo $output . PHP_EOL . PHP_EOL;
 echo implode("\n", $lines);
 
+$headers = '|User-Agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.69.69.69 YGX/537.36"&Origin="https://watch.tataplay.com"&Referer="https://watch.tataplay.com/"';
+$ctag = 'catchup-type="append" catchup-days="8" catchup-source="&begin={utc}&end={utcend}"';
+$m3uContent = "#EXTM3U x-tvg-url=\"https://avkb.short.gy/epg.xml.gz\"\n#Script by @YGX_WORLD\n\n";
+foreach ($data['data']['channels'] as $channel) {
+    $id = $channel['id'];
+    $name = $channel['name'];
+    $logo = $channel['logo_url'];
+    $genre = $channel['primaryGenre'] ? 'Tataplay-'.$channel['primaryGenre'] : 'Tataplay-Others';;
+    $mpdUrl = 'http://192.168.76.40:8000/tataplay/manifest.php?id=' . $id;
+    $wvUrl = 'http://192.168.76.40:8000/tataplay/widevine.php?id=' . $id;
+
+    $m3uContent .= "#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha\n";
+    $m3uContent .= "#KODIPROP:inputstream.adaptive.license_key=$wvUrl\n";
+    $m3uContent .= "#KODIPROP:inputstream.adaptive.manifest_type=mpd\n";
+    $m3uContent .= "#EXTINF:-1 tvg-id=\"ts$id\" $ctag group-title=\"$genre\" tvg-logo=\"https://mediaready.videoready.tv/tatasky-epg/image/fetch/f_auto,fl_lossy,q_auto,h_250,w_250/$logo\",$name\n";
+    $m3uContent .= $mpdUrl . $headers . "\n\n";
+}
+echo $m3uContent;
+
+foreach ($json as $jio_channel) {
+    $channel_id   = $jio_channel['channel_id'];
+    $channel_name = $jio_channel['channel_name'];
+    $channel_logo = $jio_channel['logoUrl'];
+    $channel_genre = $jio_channel['channelLanguageId'] 
+        ? 'JioTV-' . $jio_channel['channelLanguageId'] 
+        : 'JioTV-Others';
+
+    $channel_live_url = "http://192.168.76.40:8000/jiotv/app/ts_live_{$channel_id}.m3u8"; 
+
+    echo "#EXTINF:-1 tvg-id=\"{$channel_id}\" tvg-name=\"{$channel_name}\" tvg-logo=\"{$channel_logo}\" group-title=\"{$channel_genre}\", {$channel_name}\n";
+    echo "{$channel_live_url}\n\n";
+}
 $response = @file_get_contents("https://arunjunan20.github.io/My-IPTV/");
 $response = preg_replace(
     '/tvg-logo\s*=\s*"https:\/\/yt3\.googleusercontent\.com\/GJVGgzRXxK1FDoUpC8ztBHPu81PMnhc8inodKtEckH-rykiYLzg93HUQIoTIirwORynozMkR=s900-c-k-c0x00ffffff-no-rj"/',
