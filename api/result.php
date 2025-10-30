@@ -149,5 +149,8 @@ echo $response;
 
 $response = @file_get_contents("https://raw.githubusercontent.com/vijay-iptv/tamil/refs/heads/main/iptv.m3u");
 echo $response;
+
+$response = @file_get_contents("https://servertvhub.site/sonyliv.m3u");
+echo $response;
 exit;
 ?>
