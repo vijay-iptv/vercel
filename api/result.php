@@ -77,7 +77,7 @@ echo '#EXTM3U x-tvg-url="https://live.dinesh29.com.np/epg/jiotvplus/master-epg.x
 echo $output . PHP_EOL . PHP_EOL;
 echo implode("\n", $lines);
 
-$headers = '|User-Agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.69.69.69 YGX/537.36"&Origin="https://watch.tataplay.com"&Referer="https://watch.tataplay.com/"';
+$headers = '| X-Forwarded-For=59.178.74.184 | Origin=https://watch.tataplay.com | Referer=https://watch.tataplay.com/"';
 $ctag = 'catchup-type="append" catchup-days="8" catchup-source="&begin={utc}&end={utcend}"';
 $m3uContent = "#EXTM3U x-tvg-url=\"https://avkb.short.gy/epg.xml.gz\"\n#Script by @YGX_WORLD\n\n";
 foreach ($data['data']['channels'] as $channel) {
@@ -85,12 +85,12 @@ foreach ($data['data']['channels'] as $channel) {
     $name = $channel['name'];
     $logo = $channel['logo_url'];
     $genre = $channel['primaryGenre'] ? 'Tataplay-'.$channel['primaryGenre'] : 'Tataplay-Others';;
-    $mpdUrl = 'http://192.168.76.40:8000/tataplay/manifest.php?id=' . $id;
-    $wvUrl = 'http://192.168.76.40:8000/tataplay/widevine.php?id=' . $id;
-
-    $m3uContent .= "#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha\n";
-    $m3uContent .= "#KODIPROP:inputstream.adaptive.license_key=$wvUrl\n";
+    $mpdUrl = 'http://192.168.76.40:8000/tplay/get-mpd.php?id=' . $id;
+    
+    $m3uContent .= "#KODIPROP:inputstream.adaptive.license_type=clearkey\n";
+    $m3uContent .= "#KODIPROP:inputstream.adaptive.license_key=https://tp.drmlive-01.workers.dev?id=$id\n";
     $m3uContent .= "#KODIPROP:inputstream.adaptive.manifest_type=mpd\n";
+    $m3uContent .= "#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\n";
     $m3uContent .= "#EXTINF:-1 tvg-id=\"ts$id\" $ctag group-title=\"$genre\" tvg-logo=\"https://mediaready.videoready.tv/tatasky-epg/image/fetch/f_auto,fl_lossy,q_auto,h_250,w_250/$logo\",$name\n";
     $m3uContent .= $mpdUrl . $headers . "\n\n";
 }
