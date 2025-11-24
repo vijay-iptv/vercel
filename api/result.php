@@ -7,7 +7,7 @@ $jio_m3u_url = 'https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/j
 $zee5_m3u_url = 'https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u';
 $json_url = 'https://raw.githubusercontent.com/vijay-iptv/JSON/refs/heads/main/jiodata.json';
 $tpjson = 'https://api.ygxworld.workers.dev/fetcher.json';
-$jiojsonurl = "https://playify.pages.dev/Ziotv.json";
+$jiojsonurl = "https://playify.pages.dev/Jiotv.json";
 // Load M3U and JSON
 $jiom3u = file_get_contents($jio_m3u_url);
 $zee5m3u = file_get_contents($zee5_m3u_url);
