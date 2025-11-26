@@ -86,14 +86,19 @@ foreach ($data['data']['channels'] as $channel) {
     $id = $channel['id'];
     $name = $channel['name'];
     $logo = $channel['logo_url'];
-    $genre = $channel['primaryGenre'] ? 'Tataplay-'.$channel['primaryGenre'] : 'Tataplay-Others';;
-    $mpdUrl = 'https://la.drmlive.net/tp/' . $id . '.mpd';
-    
-    $m3uContent .= "#KODIPROP:inputstream.adaptive.license_type=clearkey\n";
+    $genre = $channel['primaryGenre'] ? 'Tataplay-'.$channel['primaryGenre'] : 'Tataplay-Others';
+
+    $m3uContent .= '#EXTINF:-1 tvg-id="ts' . $id . '" group-title="' . $genre . '" tvg-country="IN" catchup-days="7" tvg-logo="https://mediaready.videoready.tv/tatasky-epg/image/fetch/f_auto,fl_lossy,q_auto,h_250,w_250/' . $logo . '",' . $name . "\n";
+    $m3uContent .= '#KODIPROP:inputstream.adaptive.license_type=clearkey' . "\n";
+    $m3uContent .= '#KODIPROP:inputstream.adaptive.license_key=https://la.drmlive.net/tp/tpck?id=' . $id . "\n";
+    $m3uContent .= '#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36' . "\n";
+    $m3uContent .= 'https://la.drmlive.net/tp/' . $id . '.mpd|X-Forwarded-For=59.178.74.184|Origin=https://watch.tataplay.com|Referer=https://watch.tataplay.com/' . "\n\n";
+
+    /*$m3uContent .= "#KODIPROP:inputstream.adaptive.license_type=clearkey\n";
     $m3uContent .= "#KODIPROP:inputstream.adaptive.license_key=https://la.drmlive.net/tp/tpck?id=$id\n";
     $m3uContent .= "#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\n";
     $m3uContent .= "#EXTINF:-1 tvg-id=\"ts$id\" $ctag group-title=\"$genre\" tvg-logo=\"https://mediaready.videoready.tv/tatasky-epg/image/fetch/f_auto,fl_lossy,q_auto,h_250,w_250/$logo\",$name\n";
-    $m3uContent .= $mpdUrl . $headers . "\n\n";
+    $m3uContent .= $mpdUrl . $headers . "\n\n";*/
 }
 echo $m3uContent;
 
