@@ -38,9 +38,9 @@ foreach ($json as $item) {
         $output .= '#KODIPROP:inputstream.adaptive.license_type=clearkey' . PHP_EOL;
         $output .= '#KODIPROP:inputstream.adaptive.license_key=' . $item['license_key'] . PHP_EOL;
         $output .= '#EXTVLCOPT:http-user-agent=plaYtv/7.1.3 (Linux;Android 13) ygx/69.1 ExoPlayerLib/824.0' . PHP_EOL;
-        //$output .= '#EXTHTTP:{"cookie":"'.$jiojsondata[0]['cookie'].'"}'  . PHP_EOL;
-        //$output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$jiojsondata[0]['cookie'].'&xxx=%7Ccookie='.$jiojsondata[0]['cookie'] . PHP_EOL . PHP_EOL;
-        $output .= 'https://jtvp.8088yyy.workers.dev/bpk-tv/' . $item['bts'] . '/index.mpd|Referer=https://m3u.8088y.fun/'. PHP_EOL . PHP_EOL;
+        $output .= '#EXTHTTP:{"cookie":"'.$jiojsondata[0]['cookie'].'"}'  . PHP_EOL;
+        $output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$jiojsondata[0]['cookie'].'&xxx=%7Ccookie='.$jiojsondata[0]['cookie'] . PHP_EOL . PHP_EOL;
+        //$output .= 'https://jtvp.8088yyy.workers.dev/bpk-tv/' . $item['bts'] . '/index.mpd|Referer=https://m3u.8088y.fun/'. PHP_EOL . PHP_EOL;
     }
 }
 // Process M3U lines
@@ -87,18 +87,14 @@ foreach ($data['data']['channels'] as $channel) {
     $name = $channel['name'];
     $logo = $channel['logo_url'];
     $genre = $channel['primaryGenre'] ? 'Tataplay-'.$channel['primaryGenre'] : 'Tataplay-Others';
-
-    $m3uContent .= '#EXTINF:-1 tvg-id="ts' . $id . '" group-title="' . $genre . '" tvg-country="IN" catchup-days="7" tvg-logo="https://mediaready.videoready.tv/tatasky-epg/image/fetch/f_auto,fl_lossy,q_auto,h_250,w_250/' . $logo . '",' . $name . "\n";
-    $m3uContent .= '#KODIPROP:inputstream.adaptive.license_type=clearkey' . "\n";
-    $m3uContent .= '#KODIPROP:inputstream.adaptive.license_key=https://tp.drmlive-01.workers.dev?id=' . $id . "\n";
-    $m3uContent .= '#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36' . "\n";
-    $m3uContent .= 'https://la.drmlive.net/tp/' . $id . '.mpd|X-Forwarded-For=59.178.74.184 |Origin=https://watch.tataplay.com |Referer=https://watch.tataplay.com/' . "\n\n";
-
-    /*$m3uContent .= "#KODIPROP:inputstream.adaptive.license_type=clearkey\n";
-    $m3uContent .= "#KODIPROP:inputstream.adaptive.license_key=https://la.drmlive.net/tp/tpck?id=$id\n";
+    $mpdUrl = 'http://192.168.76.40:8000/tplay/get-mpd.php?id=' . $id;
+    
+    $m3uContent .= "#KODIPROP:inputstream.adaptive.license_type=clearkey\n";
+    $m3uContent .= "#KODIPROP:inputstream.adaptive.license_key=https://tp.drmlive-01.workers.dev?id=$id\n";
+    $m3uContent .= "#KODIPROP:inputstream.adaptive.manifest_type=mpd\n";
     $m3uContent .= "#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\n";
     $m3uContent .= "#EXTINF:-1 tvg-id=\"ts$id\" $ctag group-title=\"$genre\" tvg-logo=\"https://mediaready.videoready.tv/tatasky-epg/image/fetch/f_auto,fl_lossy,q_auto,h_250,w_250/$logo\",$name\n";
-    $m3uContent .= $mpdUrl . $headers . "\n\n";*/
+    $m3uContent .= $mpdUrl . $headers . "\n\n";
 }
 echo $m3uContent;
 
