@@ -40,8 +40,9 @@ foreach ($json as $item) {
         $output .= '#KODIPROP:inputstream.adaptive.license_type=clearkey' . PHP_EOL;
         $output .= '#KODIPROP:inputstream.adaptive.license_key=' . $item['license_key'] . PHP_EOL;
         $output .= '#EXTVLCOPT:http-user-agent=plaYtv/7.1.3 (Linux;Android 13) ygx/69.1 ExoPlayerLib/824.0' . PHP_EOL;
-        $output .= '#EXTHTTP:{"cookie":"'.$jiojsondata[0]['cookie'].'"}'  . PHP_EOL;
-        $output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$jiojsondata[0]['cookie'].'&xxx=%7Ccookie='.$jiojsondata[0]['cookie'] . PHP_EOL . PHP_EOL;
+        $output .= 'https://jtvp.8088yyy.workers.dev/bpk-tv/' . $item['bts'] . '/index.mpd|Referer=https://m3u.8088y.fun/'. PHP_EOL . PHP_EOL;
+        //$output .= '#EXTHTTP:{"cookie":"'.$jiojsondata[0]['cookie'].'"}'  . PHP_EOL;
+        //$output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$jiojsondata[0]['cookie'].'&xxx=%7Ccookie='.$jiojsondata[0]['cookie'] . PHP_EOL . PHP_EOL;
         
         //$output .= '#EXTHTTP:{"cookie":"'.$hdnea.'"}'  . PHP_EOL;
         //$output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$hdnea.'&xxx=%7Ccookie='.$hdnea . PHP_EOL . PHP_EOL;
