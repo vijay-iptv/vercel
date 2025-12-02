@@ -7,12 +7,14 @@ $jio_m3u_url = 'https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/j
 $zee5_m3u_url = 'https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u';
 $json_url = 'https://raw.githubusercontent.com/vijay-iptv/JSON/refs/heads/main/jiodata.json';
 $tpjson = 'https://api.ygxworld.workers.dev/fetcher.json';
+$jiojsonurl = "https://playify.pages.dev/Jiotv.json";
 
 // Load M3U and JSON
 $jiom3u = file_get_contents($jio_m3u_url);
 $zee5m3u = file_get_contents($zee5_m3u_url);
 $json = json_decode(file_get_contents($json_url), true);
 $data = json_decode(file_get_contents($tpjson), true);
+$jiojsondata = json_decode(file_get_contents($jiojsonurl), true);
 
 if (preg_match('/__hdnea__=[^"}]+/', $jiom3u, $matches)) {
     $hdnea = $matches[0];
@@ -38,8 +40,11 @@ foreach ($json as $item) {
         $output .= '#KODIPROP:inputstream.adaptive.license_type=clearkey' . PHP_EOL;
         $output .= '#KODIPROP:inputstream.adaptive.license_key=' . $item['license_key'] . PHP_EOL;
         $output .= '#EXTVLCOPT:http-user-agent=plaYtv/7.1.3 (Linux;Android 13) ygx/69.1 ExoPlayerLib/824.0' . PHP_EOL;
-        $output .= '#EXTHTTP:{"cookie":"'.$hdnea.'"}'  . PHP_EOL;
-        $output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$hdnea.'&xxx=%7Ccookie='.$hdnea . PHP_EOL . PHP_EOL;
+        $output .= '#EXTHTTP:{"cookie":"'.$jiojsondata[0]['cookie'].'"}'  . PHP_EOL;
+        $output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$jiojsondata[0]['cookie'].'&xxx=%7Ccookie='.$jiojsondata[0]['cookie'] . PHP_EOL . PHP_EOL;
+        
+        //$output .= '#EXTHTTP:{"cookie":"'.$hdnea.'"}'  . PHP_EOL;
+        //$output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$hdnea.'&xxx=%7Ccookie='.$hdnea . PHP_EOL . PHP_EOL;
         //$output .= 'https://jtvp.8088yyy.workers.dev/bpk-tv/' . $item['bts'] . '/index.mpd|Referer=https://m3u.8088y.fun/'. PHP_EOL . PHP_EOL;
     }
 }
