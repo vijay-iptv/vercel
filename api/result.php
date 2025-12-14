@@ -6,6 +6,7 @@ date_default_timezone_set('Asia/Kolkata');
 $jio_m3u_url = 'https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u';
 $zee5_m3u_url = 'https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u';
 $json_url = 'https://raw.githubusercontent.com/vijay-iptv/JSON/refs/heads/main/jiodata.json';
+$z5_json_url = 'https://raw.githubusercontent.com/vijay-iptv/JSON/refs/heads/main/zee5.json';
 $tpjson = 'https://api.ygxworld.workers.dev/fetcher.json';
 $cookie_url = "https://play.yuvraj.news/jio/cookie.php";
 
@@ -14,9 +15,10 @@ $jiom3u = file_get_contents($jio_m3u_url);
 $zee5m3u = file_get_contents($zee5_m3u_url);
 $json = json_decode(file_get_contents($json_url), true);
 $data = json_decode(file_get_contents($tpjson), true);
+$z5json = json_decode(file_get_contents($z5_json_url), true);
 $cookiedata = json_decode(file_get_contents($cookie_url), true);
 
-if (preg_match('/__hdnea__=[^"}]+/', $jiom3u, $matches)) {
+/*if (preg_match('/__hdnea__=[^"}]+/', $jiom3u, $matches)) {
     $hdnea = $matches[0];
 } else {
     // 2. Fallback: try to extract from URL query string
@@ -25,7 +27,7 @@ if (preg_match('/__hdnea__=[^"}]+/', $jiom3u, $matches)) {
     } else {
         $hdnea = '';
     }
-}
+}*/
 $output = '#EXTM3U x-tvg-url="https://avkb.short.gy/jioepg.xml.gz"' . PHP_EOL;
 foreach ($json as $item) {
     if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'])) {
@@ -50,7 +52,7 @@ foreach ($json as $item) {
     }
 }
 // Process M3U lines
-$combined_m3u = $zee5m3u;
+/* $combined_m3u = $zee5m3u;
 $lines = explode("\n", $combined_m3u);
 
 foreach ($lines as &$line) {
@@ -79,11 +81,38 @@ foreach ($lines as &$line) {
             }
         }
     }
+} */
+
+preg_match_all('/hdntl=[^"\s]+/', $zee5m3u, $matches);
+$uniqueTokens = array_unique($matches[0]);
+$hdntl = reset($uniqueTokens);
+$zee5 = '';
+foreach ($z5json as $item) {
+    if (
+        isset(
+            $item['channel_id'],
+            $item['logoUrl'],
+            $item['channelLanguageId'],
+            $item['channel_name'],
+            $item['url']
+        )
+    ) {
+        $zee5 .= '#EXTINF:-1 tvg-id="' . $item['channel_id'] .
+                 '" group-title="' . $item['channelLanguageId'] .
+                 '" tvg-logo="' . $item['logoUrl'] .
+                 '",' . $item['channel_name'] . PHP_EOL;
+
+        $zee5 .= "#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)\n";
+
+        $separator = (strpos($item['url'], '?') !== false) ? '&' : '?';
+        $zee5 .= $item['url'] . $separator . $hdntl . PHP_EOL . PHP_EOL;
+    }
 }
+
 header('Content-Type: text/plain');
-echo '#EXTM3U x-tvg-url="https://live.dinesh29.com.np/epg/jiotvplus/master-epg.xml.gz \n';
+echo '#EXTM3U x-tvg-url="https://avkb.short.gy/epg.xml.gz \n';
 echo $output . PHP_EOL . PHP_EOL;
-echo implode("\n", $lines);
+echo $zee5 . PHP_EOL . PHP_EOL;
 
 $headers = '|X-Forwarded-For=59.178.74.184|Origin=https://watch.tataplay.com|Referer=https://watch.tataplay.com/"';
 $ctag = 'catchup-type="append" catchup-days="8" catchup-source="&begin={utc}&end={utcend}"';
