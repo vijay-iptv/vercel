@@ -102,10 +102,8 @@ foreach ($z5json as $item) {
                  '" tvg-logo="' . $item['logoUrl'] .
                  '",' . $item['channel_name'] . PHP_EOL;
 
-        $zee5 .= "#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)\n";
-
-        $separator = (strpos($item['url'], '?') !== false) ? '&' : '?';
-        $zee5 .= $item['url'] . $separator . $hdntl . PHP_EOL . PHP_EOL;
+        $zee5 .= "#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 ygx/69.1 Safari/537.36". PHP_EOL;
+        $zee5 .= $item['url'] . "?" . $hdntl . PHP_EOL . PHP_EOL;
     }
 }
 
