@@ -117,7 +117,7 @@ $jcinema = "";
 foreach ($jcinemajson as $ch) {
 
     $jcinema .= '#EXTINF:-1 tvg-id="' . $ch['channel_id'] .
-                '" group-title="' . $ch['channelCategoryId'] .
+                '" group-title="Jcinema-' . $ch['channelCategoryId'] .
                 '" tvg-logo="' . $ch['logoUrl'] . '",' .
                 $ch['channel_name'] . "\n";
 
