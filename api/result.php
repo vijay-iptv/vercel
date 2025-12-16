@@ -5,17 +5,21 @@ date_default_timezone_set('Asia/Kolkata');
 
 $jio_m3u_url = 'https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u';
 $zee5_m3u_url = 'https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u';
+$jcinema_m3u_url = 'https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jcinema.m3u';
 $json_url = 'https://raw.githubusercontent.com/vijay-iptv/JSON/refs/heads/main/jiodata.json';
 $z5_json_url = 'https://raw.githubusercontent.com/vijay-iptv/JSON/refs/heads/main/zee5.json';
+$jcinema_json_url = 'https://raw.githubusercontent.com/vijay-iptv/JSON/refs/heads/main/jiocinema.json';
 $tpjson = 'https://api.ygxworld.workers.dev/fetcher.json';
 $cookie_url = "https://play.yuvraj.news/jio/cookie.php";
 
 // Load M3U and JSON
 $jiom3u = file_get_contents($jio_m3u_url);
 $zee5m3u = file_get_contents($zee5_m3u_url);
+$jcinemam3u = file_get_contents($jcinema_m3u_url);
 $json = json_decode(file_get_contents($json_url), true);
 $data = json_decode(file_get_contents($tpjson), true);
 $z5json = json_decode(file_get_contents($z5_json_url), true);
+$jcinemajson = json_decode(file_get_contents($jcinema_json_url), true);
 $cookiedata = json_decode(file_get_contents($cookie_url), true);
 
 /*if (preg_match('/__hdnea__=[^"}]+/', $jiom3u, $matches)) {
@@ -107,12 +111,30 @@ foreach ($z5json as $item) {
     }
 }
 
+preg_match('/"cookie":"([^"]+)"/', $jcinemam3u, $m);
+$cookie = isset($m[1]) ? '{"cookie":"' . $m[1] . '"}' : '';
+$jcinema = "";
+foreach ($jcinemajson as $ch) {
+
+    $jcinema .= '#EXTINF:-1 tvg-id="' . $ch['channel_id'] .
+                '" group-title="' . $ch['channelCategoryId'] .
+                '" tvg-logo="' . $ch['logoUrl'] . '",' .
+                $ch['channel_name'] . "\n";
+
+    $jcinema .= "#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\n";
+    $jcinema .= "#EXTHTTP:$cookie\n";
+    $jcinema .= "#EXTVLCOPT:http-origin={$ch['source']}\n";
+    $jcinema .= "#EXTVLCOPT:http-referrer={$ch['source']}/\n";
+    $jcinema .= $ch['url'] . "\n\n";
+}
+
 header('Content-Type: text/plain');
 echo '#EXTM3U x-tvg-url="https://avkb.short.gy/epg.xml.gz \n';
 echo $output . PHP_EOL . PHP_EOL;
 echo $zee5 . PHP_EOL . PHP_EOL;
+echo $jcinema . PHP_EOL . PHP_EOL;
 
-$headers = '|X-Forwarded-For=59.178.74.184|Origin=https://watch.tataplay.com|Referer=https://watch.tataplay.com/"';
+/* $headers = '|X-Forwarded-For=59.178.74.184|Origin=https://watch.tataplay.com|Referer=https://watch.tataplay.com/"';
 $ctag = 'catchup-type="append" catchup-days="8" catchup-source="&begin={utc}&end={utcend}"';
 $m3uContent = "#EXTM3U x-tvg-url=\"https://avkb.short.gy/epg.xml.gz\"\n#Script by @YGX_WORLD\n\n";
 foreach ($data['data']['channels'] as $channel) {
@@ -129,7 +151,7 @@ foreach ($data['data']['channels'] as $channel) {
     $m3uContent .= "#EXTINF:-1 tvg-id=\"ts$id\" $ctag group-title=\"$genre\" tvg-logo=\"https://mediaready.videoready.tv/tatasky-epg/image/fetch/f_auto,fl_lossy,q_auto,h_250,w_250/$logo\",$name\n";
     $m3uContent .= $mpdUrl . $headers . "\n\n";
 }
-echo $m3uContent;
+echo $m3uContent; */
 
 foreach ($json as $jio_channel) {
     $channel_id   = $jio_channel['channel_id'];
