@@ -161,7 +161,7 @@ foreach ($json as $jio_channel) {
         ? 'JioTV-' . $jio_channel['channelLanguageId'] 
         : 'JioTV-Others';
 
-    $channel_live_url = "https://localhost:5350/live/".$channel_id.".m3u8"; 
+    $channel_live_url = "http://localhost:5350/live/".$channel_id.".m3u8"; 
 
     echo "#EXTINF:-1 tvg-id=\"{$channel_id}\" tvg-name=\"{$channel_name}\" tvg-logo=\"{$channel_logo}\" group-title=\"{$channel_genre}\", {$channel_name}\n";
     echo "{$channel_live_url}\n\n";
