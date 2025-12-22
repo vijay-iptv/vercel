@@ -10,7 +10,7 @@ $json_url = 'https://raw.githubusercontent.com/vijay-iptv/JSON/refs/heads/main/j
 $z5_json_url = 'https://raw.githubusercontent.com/vijay-iptv/JSON/refs/heads/main/zee5.json';
 $jcinema_json_url = 'https://raw.githubusercontent.com/vijay-iptv/JSON/refs/heads/main/jiocinema.json';
 $tpjson = 'https://api.ygxworld.workers.dev/fetcher.json';
-$cookie_url = "https://play.yuvraj.news/jio/cookie.php";
+//$cookie_url = "https://play.yuvraj.news/jio/cookie.php";
 
 // Load M3U and JSON
 $jiom3u = file_get_contents($jio_m3u_url);
@@ -20,7 +20,7 @@ $json = json_decode(file_get_contents($json_url), true);
 $data = json_decode(file_get_contents($tpjson), true);
 $z5json = json_decode(file_get_contents($z5_json_url), true);
 $jcinemajson = json_decode(file_get_contents($jcinema_json_url), true);
-$cookiedata = json_decode(file_get_contents($cookie_url), true);
+//$cookiedata = json_decode(file_get_contents($cookie_url), true);
 
 preg_match_all('/__hdnea__=[^"}]+/', $jiom3u, $matches);
 $uniqueTokens = array_unique($matches[0]);
@@ -45,7 +45,7 @@ foreach ($json as $item) {
         //$output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$cookiedata['cookie'] . PHP_EOL . PHP_EOL;
         
         //$output .= '#EXTHTTP:{"cookie":"'.$hdnea.'"}'  . PHP_EOL;
-        $output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$hdnea.'&xxx=%7Ccookie='.$hdnea . PHP_EOL . PHP_EOL;
+        $output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$hdnea. PHP_EOL . PHP_EOL;
         //$output .= 'https://jtvp.8088yyy.workers.dev/bpk-tv/' . $item['bts'] . '/index.mpd|Referer=https://m3u.8088y.fun/'. PHP_EOL . PHP_EOL;
     }
 }
