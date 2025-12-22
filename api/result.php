@@ -22,16 +22,10 @@ $z5json = json_decode(file_get_contents($z5_json_url), true);
 $jcinemajson = json_decode(file_get_contents($jcinema_json_url), true);
 $cookiedata = json_decode(file_get_contents($cookie_url), true);
 
-if (preg_match('/__hdnea__=[^"}]+/', $jiom3u, $matches)) {
-    $hdnea = $matches[0];
-} else {
-    // 2. Fallback: try to extract from URL query string
-    if (preg_match('/[?&]__hdnea__=([^&]+)/', $jiom3u, $matches)) {
-        $hdnea = '__hdnea__=' . $matches[1];
-    } else {
-        $hdnea = '';
-    }
-}
+preg_match_all('/__hdnea__=[^"}]+/', $jiom3u, $matches);
+$uniqueTokens = array_unique($matches[0]);
+$hdnea = reset($uniqueTokens);
+
 $output = '#EXTM3U x-tvg-url="https://avkb.short.gy/jioepg.xml.gz"' . PHP_EOL;
 foreach ($json as $item) {
     if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'])) {
