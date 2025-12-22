@@ -22,7 +22,7 @@ $z5json = json_decode(file_get_contents($z5_json_url), true);
 $jcinemajson = json_decode(file_get_contents($jcinema_json_url), true);
 $cookiedata = json_decode(file_get_contents($cookie_url), true);
 
-/*if (preg_match('/__hdnea__=[^"}]+/', $jiom3u, $matches)) {
+if (preg_match('/__hdnea__=[^"}]+/', $jiom3u, $matches)) {
     $hdnea = $matches[0];
 } else {
     // 2. Fallback: try to extract from URL query string
@@ -31,7 +31,7 @@ $cookiedata = json_decode(file_get_contents($cookie_url), true);
     } else {
         $hdnea = '';
     }
-}*/
+}
 $output = '#EXTM3U x-tvg-url="https://avkb.short.gy/jioepg.xml.gz"' . PHP_EOL;
 foreach ($json as $item) {
     if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'])) {
@@ -51,8 +51,8 @@ foreach ($json as $item) {
         //$output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$cookiedata['cookie'] . PHP_EOL . PHP_EOL;
         
         //$output .= '#EXTHTTP:{"cookie":"'.$hdnea.'"}'  . PHP_EOL;
-        ///$output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$hdnea.'&xxx=%7Ccookie='.$hdnea . PHP_EOL . PHP_EOL;
-        $output .= 'https://jtvp.8088yyy.workers.dev/bpk-tv/' . $item['bts'] . '/index.mpd|Referer=https://m3u.8088y.fun/'. PHP_EOL . PHP_EOL;
+        $output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$hdnea.'&xxx=%7Ccookie='.$hdnea . PHP_EOL . PHP_EOL;
+        //$output .= 'https://jtvp.8088yyy.workers.dev/bpk-tv/' . $item['bts'] . '/index.mpd|Referer=https://m3u.8088y.fun/'. PHP_EOL . PHP_EOL;
     }
 }
 // Process M3U lines
