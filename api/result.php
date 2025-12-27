@@ -45,8 +45,8 @@ foreach ($json as $item) {
         //$output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$cookiedata['cookie'] . PHP_EOL . PHP_EOL;
         
         //$output .= '#EXTHTTP:{"cookie":"'.$hdnea.'"}'  . PHP_EOL;
-        //$output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$hdnea. PHP_EOL . PHP_EOL;
-        $output .= 'https://jtvp.8088yyy.workers.dev/bpk-tv/' . $item['bts'] . '/index.mpd|Referer=https://m3u.8088y.fun/'. PHP_EOL . PHP_EOL;
+        $output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$hdnea. PHP_EOL . PHP_EOL;
+        //$output .= 'https://jtvp.8088yyy.workers.dev/bpk-tv/' . $item['bts'] . '/index.mpd|Referer=https://m3u.8088y.fun/'. PHP_EOL . PHP_EOL;
     }
 }
 // Process M3U lines
