@@ -26,7 +26,8 @@ $arjunjson = @file_get_contents("https://arunjunan20.github.io/My-IPTV/");
 preg_match_all('/__hdnea__=[^"}]+/', $jiom3u, $matches);
 $uniqueTokens = array_unique($matches[0]);
 $hdnea = reset($uniqueTokens);
-if($hdnea === '')
+
+if(count($uniqueTokens) === 0)
 {
     preg_match_all('/__hdnea__=[^"}]+/', $arjunjson, $matches);
     $uniqueTokens = array_unique($matches[0]);
