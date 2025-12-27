@@ -20,11 +20,18 @@ $json = json_decode(file_get_contents($json_url), true);
 $data = json_decode(file_get_contents($tpjson), true);
 $z5json = json_decode(file_get_contents($z5_json_url), true);
 $jcinemajson = json_decode(file_get_contents($jcinema_json_url), true);
+$arjunjson = @file_get_contents("https://arunjunan20.github.io/My-IPTV/");
 //$cookiedata = json_decode(file_get_contents($cookie_url), true);
 
 preg_match_all('/__hdnea__=[^"}]+/', $jiom3u, $matches);
 $uniqueTokens = array_unique($matches[0]);
 $hdnea = reset($uniqueTokens);
+if($hdnea === '')
+{
+    preg_match_all('/__hdnea__=[^"}]+/', $arjunjson, $matches);
+    $uniqueTokens = array_unique($matches[0]);
+    $hdnea = reset($uniqueTokens);
+}
 
 $output = '#EXTM3U x-tvg-url="https://avkb.short.gy/jioepg.xml.gz"' . PHP_EOL;
 foreach ($json as $item) {
@@ -160,43 +167,43 @@ foreach ($json as $jio_channel) {
     echo "#EXTINF:-1 tvg-id=\"{$channel_id}\" tvg-name=\"{$channel_name}\" tvg-logo=\"{$channel_logo}\" group-title=\"{$channel_genre}\", {$channel_name}\n";
     echo "{$channel_live_url}\n\n";
 }
-$response = @file_get_contents("https://arunjunan20.github.io/My-IPTV/");
-$response = preg_replace(
+
+$arjunjson = preg_replace(
     '/tvg-logo\s*=\s*"https:\/\/yt3\.googleusercontent\.com\/GJVGgzRXxK1FDoUpC8ztBHPu81PMnhc8inodKtEckH-rykiYLzg93HUQIoTIirwORynozMkR=s900-c-k-c0x00ffffff-no-rj"/',
     'tvg-logo="https://raw.githubusercontent.com/vijay-iptv/logos/refs/heads/main/Zee_Tamil_News.png"',
-    $response
+    $arjunjson
 );
-$response = preg_replace(
+$arjunjson = preg_replace(
     '/https:\/\/d229kpbsb5jevy\.cloudfront\.net\/timesplay\/content\/common\/logos\/channel\/logos\/wthfwe\.jpeg/',
     'https://mediaready.videoready.tv/tatasky-epg/image/fetch/f_auto,fl_lossy,q_auto,h_250,w_250/https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/imageContent-12095-j9ooixfs-v1/imageContent-12095-j9ooixfs-m1.png',
-    $response
+    $arjunjson
 );
 $response = preg_replace(
     '/https:\/\/images\.now-tv\.com\/shares\/channelPreview\/img\/en_hk\/color\/ch115_160_115/',
     'https://raw.githubusercontent.com/vijay-iptv/logos/refs/heads/main/HBO.png',
-    $response
+    $arjunjson
 );
 $response = preg_replace(
     '/https:\/\/resizer-acm\.eco\.astro\.com\.my\/tr:w-256,q:85\/https:\/\/divign0fdw3sv\.cloudfront\.net\/Images\/ChannelLogo\/contenthub\/337_144\.png/',
     'https://raw.githubusercontent.com/vijay-iptv/logos/refs/heads/main/Cinemax.png',
-    $response
+    $arjunjson
 );
 $response = preg_replace(
     '/https:\/\/d229kpbsb5jevy\.cloudfront\.net\/timesplay\/content\/common\/logos\/channel\/logos\/vunjev\.jpeg/',
     'https://raw.githubusercontent.com/vijay-iptv/logos/refs/heads/main/MNX_HD.png',
-    $response
+    $arjunjson
 );
 $response = preg_replace(
     '/https:\/\/d229kpbsb5jevy\.cloudfront\.net\/timesplay\/content\/common\/logos\/channel\/logos\/leazcc\.jpeg/',
     'https://mediaready.videoready.tv/tatasky-epg/image/fetch/f_auto,fl_lossy,q_auto,h_250,w_250/https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/imageContent-826-j5m9kx5c-v1/imageContent-826-j5m9kx5c-m1.png',
-    $response
+    $arjunjson
 );
 $response = preg_replace(
     '/https:\/\/d229kpbsb5jevy\.cloudfront\.net\/tv\/150\/150\/bnw\/isai-aruvi-black\.png/',
     'https://raw.githubusercontent.com/vijay-iptv/logos/refs/heads/main/Isai_Aruvi.png',
-    $response
+    $arjunjson
 );
-echo $response;
+echo $arjunjson;
 
 $response = @file_get_contents("https://raw.githubusercontent.com/vijay-iptv/tamil/refs/heads/main/iptv.m3u");
 echo $response;
