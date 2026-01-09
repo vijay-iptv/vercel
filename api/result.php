@@ -109,7 +109,7 @@ foreach ($z5json as $item) {
                  '",' . $item['channel_name'] . PHP_EOL;
         
         $zee5 .= "#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 @joker_verse/537.36". PHP_EOL;
-        $zee5 .= "#EXTHTTP:{"Referer":"https://www.zee5.com/"}" . PHP_EOL;
+        $zee5 .= "#EXTHTTP:{\"Referer\":\"https://www.zee5.com/\"}". PHP_EOL;
         $zee5 .= $item['url'] . "?" . $hdntl . PHP_EOL . PHP_EOL;
     }
 }
