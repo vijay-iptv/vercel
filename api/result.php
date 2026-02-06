@@ -56,7 +56,7 @@ foreach ($json as $item) {
         $output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$hdnea. PHP_EOL . PHP_EOL;
         //$output .= 'https://jtvp.8088yyy.workers.dev/bpk-tv/' . $item['bts'] . '/index.mpd|Referer=https://m3u.8088y.fun/'. PHP_EOL . PHP_EOL;
     }
-   if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'], $item['channel_name']) && $item['channel_id'] != 'no')
+   if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'], $item['channel_name']) && $item['key'] != 'no')
     {
         $output .= '#EXTINF:-1 tvg-id="' . $item['channel_id'] . '" group-title="DRM-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
         $output .= '#KODIPROP:inputstream.adaptive.license_type=clearkey' . PHP_EOL;
@@ -65,7 +65,7 @@ foreach ($json as $item) {
         $output .= 'https://jt.drmlive.net/jiotvplus/' . $item['channel_id'] . '.mpd' . PHP_EOL;
     }
     
-    if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'], $item['channel_name']) && $item['channel_id'] == 'no')
+    if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'], $item['channel_name']) && $item['key'] == 'no')
     {
         $output .= '#EXTINF:-1 tvg-id="' . $item['channel_id'] . '" group-title="DRM-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
         $output .= 'https://jt.drmlive.net/jiotvplus/' . $item['channel_id'] . '.mpd' . PHP_EOL;
