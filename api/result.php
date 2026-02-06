@@ -140,6 +140,12 @@ echo $jcinema . PHP_EOL . PHP_EOL;
 $headers = '|X-Forwarded-For=59.178.74.184|Origin=https://watch.tataplay.com|Referer=https://watch.tataplay.com/"';
 $ctag = 'catchup-type="append" catchup-days="8" catchup-source="&begin={utc}&end={utcend}"';
 $m3uContent = "#EXTM3U x-tvg-url=\"https://avkb.short.gy/epg.xml.gz\"\n#Script by @YGX_WORLD\n\n";
+$m3uContent .= "#KODIPROP:inputstream.adaptive.license_type=clearkey\n";
+$m3uContent .= "#KODIPROP:inputstream.adaptive.manifest_type=dash\n";
+$m3uContent .= "#KODIPROP:inputstream.adaptive.license_key=https://mix.drmlive.net/mix/allowipmpd_key.php?id=chlajabsdk\n";
+$m3uContent .= "#EXTINF:-1 tvg-logo=\"https://i.postimg.cc/d3Yf3PHX/DRMLIVE-Aggressive-Logo.png\" group-title=\"1-Playlist-Activation\",Activate Playlist\n";
+$m3uContent .= "https://mix.drmlive.net/mix/actchaljabsdk.mpd?token=VEZxdmhrQmRpTWxqUEdOYzhTeEFhaGtUc1JzQURjTW9YSE9KWkIyZEZtZ2thbi9qRnpQRUcwN2VFWFlwNkZwc1N3ejZJMTdVSUlnTGVUOWZlYjJ0dVdOeGZsSnhCQ3h4MENIc1dRMitLOVpvN0Q0RTY4ZzV6UGRnUzhKZS84V3Q=\n";
+
 foreach ($data['data']['channels'] as $channel) {
     $id = $channel['id'];
     $name = $channel['name'];
