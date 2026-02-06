@@ -137,7 +137,7 @@ echo $output . PHP_EOL . PHP_EOL;
 echo $zee5 . PHP_EOL . PHP_EOL;
 echo $jcinema . PHP_EOL . PHP_EOL;
 
-/* $headers = '|X-Forwarded-For=59.178.74.184|Origin=https://watch.tataplay.com|Referer=https://watch.tataplay.com/"';
+$headers = '|X-Forwarded-For=59.178.74.184|Origin=https://watch.tataplay.com|Referer=https://watch.tataplay.com/"';
 $ctag = 'catchup-type="append" catchup-days="8" catchup-source="&begin={utc}&end={utcend}"';
 $m3uContent = "#EXTM3U x-tvg-url=\"https://avkb.short.gy/epg.xml.gz\"\n#Script by @YGX_WORLD\n\n";
 foreach ($data['data']['channels'] as $channel) {
@@ -145,16 +145,15 @@ foreach ($data['data']['channels'] as $channel) {
     $name = $channel['name'];
     $logo = $channel['logo_url'];
     $genre = $channel['primaryGenre'] ? 'Tataplay-'.$channel['primaryGenre'] : 'Tataplay-Others';
-    $mpdUrl = 'http://192.168.76.40:8000/tplay/get-mpd.php?id=' . $id;
+    $mpdUrl = 'https://la.drmlive.net/tp/'.$id.'.mpd';
     
     $m3uContent .= "#KODIPROP:inputstream.adaptive.license_type=clearkey\n";
-    $m3uContent .= "#KODIPROP:inputstream.adaptive.license_key=https://tp.drmlive-01.workers.dev?id=$id\n";
-    $m3uContent .= "#KODIPROP:inputstream.adaptive.manifest_type=mpd\n";
-    $m3uContent .= "#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\n";
+    $m3uContent .= "#KODIPROP:inputstream.adaptive.license_key=https://la.drmlive.net/tp/tpck?id=$id\n";
+    $m3uContent .= "#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36\n";
     $m3uContent .= "#EXTINF:-1 tvg-id=\"ts$id\" $ctag group-title=\"$genre\" tvg-logo=\"https://mediaready.videoready.tv/tatasky-epg/image/fetch/f_auto,fl_lossy,q_auto,h_250,w_250/$logo\",$name\n";
     $m3uContent .= $mpdUrl . $headers . "\n\n";
 }
-echo $m3uContent; */
+echo $m3uContent; 
 
 foreach ($json as $jio_channel) {
     $channel_id   = $jio_channel['channel_id'];
