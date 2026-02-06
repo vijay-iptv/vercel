@@ -68,7 +68,7 @@ foreach ($json as $item) {
     if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'], $item['channel_name']) && $item['key'] == 'no')
     {
         $output .= '#EXTINF:-1 tvg-id="' . $item['channel_id'] . '" group-title="DRM-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
-        $output .= 'https://jt.drmlive.net/jiotvplus/' . $item['channel_id'] . '.mpd' . PHP_EOL;
+        $output .= 'https://jt.drmlive.net/jiotvplus/' . $item['channel_id'] . '.m3u8' . PHP_EOL;
     }
 }
 // Process M3U lines
