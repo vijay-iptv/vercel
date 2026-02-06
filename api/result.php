@@ -58,7 +58,7 @@ foreach ($json as $item) {
     }
     if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'], $item['channel_name']))
     {
-        $output .= '#EXTINF:-1 tvg-id="' . $item['channel_id'] . '" group-title="JioPlus-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
+        $output .= '#EXTINF:-1 tvg-id="' . $item['channel_id'] . '" group-title="DRM-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
         $output .= '#KODIPROP:inputstream.adaptive.license_type=clearkey' . PHP_EOL;
         $output .= '#KODIPROP:inputstream.adaptive.license_key=https://jt.drmlive.net/jiotvplus/jtck?id=' . $item['channel_id'] . PHP_EOL;
         $output .= '#EXTHTTP:{"cookie":"' . $hdnea . '"}' . PHP_EOL;
