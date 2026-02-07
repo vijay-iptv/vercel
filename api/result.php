@@ -82,8 +82,8 @@ foreach ($json as $item) {
     
     if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'], $item['channel_name']) && $item['key'] == 'no')
     {
-        $output .= '#EXTINF:-1 tvg-id="' . $item['channel_id'] . '" group-title="DENVER-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
-        $output .= 'https://game.denver69.fun/Jtv/YoEL0H/Jtv.m3u8?id=' . $item['channel_id'] . '|User-Agent=Denver1769' . PHP_EOL;
+        $output .= '#EXTINF:-1 tvg-id="' . $item['denver_id'] . '" group-title="DENVER-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
+        $output .= 'https://game.denver69.fun/Jtv/YoEL0H/Jtv.m3u8?id=' . $item['denver_id'] . '|User-Agent=Denver1769' . PHP_EOL;
     }
 }
 // Process M3U lines
