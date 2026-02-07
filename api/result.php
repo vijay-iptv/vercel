@@ -56,7 +56,7 @@ foreach ($json as $item) {
         $output .= 'https://jiotvpllive.cdn.jio.com/bpk-tv/' . $item['bts'] . '/index.mpd?'.$hdnea. PHP_EOL . PHP_EOL;
         //$output .= 'https://jtvp.8088yyy.workers.dev/bpk-tv/' . $item['bts'] . '/index.mpd|Referer=https://m3u.8088y.fun/'. PHP_EOL . PHP_EOL;
     }
-   if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'], $item['channel_name']) && $item['key'] != 'no')
+    if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'], $item['channel_name']) && $item['key'] != 'no')
     {
         $output .= '#EXTINF:-1 tvg-id="' . $item['channel_id'] . '" group-title="DRM-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
         $output .= '#KODIPROP:inputstream.adaptive.license_type=clearkey' . PHP_EOL;
@@ -69,6 +69,21 @@ foreach ($json as $item) {
     {
         $output .= '#EXTINF:-1 tvg-id="' . $item['channel_id'] . '" group-title="DRM-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
         $output .= 'https://jt.drmlive.net/jiotvplus/' . $item['channel_id'] . '.m3u8' . PHP_EOL;
+    }
+
+    if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'], $item['channel_name']) && $item['key'] != 'no')
+    {
+        $output .= '#EXTINF:-1 tvg-id="' . $item['channel_id'] . '" group-title="DENVER-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
+        $output .= '#KODIPROP:inputstream.adaptive.license_type=clearkey' . PHP_EOL;
+        $output .= '#KODIPROP:inputstream.adaptive.license_key=https://game.denver69.fun/Jtv/key.php?id=' . $item['channel_id'].'&token=YoEL0H' . PHP_EOL;
+        $output .= '#EXTVLCOPT:http-user-agent=Denver1769' . PHP_EOL;
+        $output .= 'https://game.denver69.fun/Jtv/YoEL0H/Jtv.mpd?id=' . $item['channel_id'] . '|User-Agent=Denver1769' . PHP_EOL;
+    }
+    
+    if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'], $item['channel_name']) && $item['key'] == 'no')
+    {
+        $output .= '#EXTINF:-1 tvg-id="' . $item['channel_id'] . '" group-title="DENVER-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
+        $output .= 'https://game.denver69.fun/Jtv/YoEL0H/Jtv.m3u8?id=' . $item['channel_id'] . '|User-Agent=Denver1769' . PHP_EOL;
     }
 }
 // Process M3U lines
