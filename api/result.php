@@ -73,7 +73,7 @@ foreach ($json as $item) {
 
     if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'], $item['channel_name']) && $item['key'] != 'no')
     {
-        $output .= '#EXTINF:-1 tvg-id="' . $item['channel_id'] . '" group-title="DENVERS-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
+        $output .= '#EXTINF:-1 tvg-id="' . $item['channel_id'] . '" group-title="DENVER-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
         $output .= '#KODIPROP:inputstream.adaptive.license_type=clearkey' . PHP_EOL;
         $output .= '#KODIPROP:inputstream.adaptive.license_key=https://game.denver69.fun/Jtv/key.php?id=' . $item['channel_id'].'&token=YoEL0H' . PHP_EOL;
         $output .= '#EXTVLCOPT:http-user-agent=Denver1769' . PHP_EOL;
@@ -82,7 +82,7 @@ foreach ($json as $item) {
     
     if (isset($item['channel_id'], $item['logoUrl'], $item['channelLanguageId'], $item['channel_name']) && $item['key'] == 'no')
     {
-        $output .= '#EXTINF:-1 tvg-id="' . $item['denver_id'] . '" group-title="DENVERS-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
+        $output .= '#EXTINF:-1 tvg-id="' . $item['denver_id'] . '" group-title="DENVER-' . $item['channelLanguageId'] . '" tvg-logo="' . $item['logoUrl'] . '",' . $item['channel_name'] . PHP_EOL;
         $output .= 'https://game.denver69.fun/Jtv/YoEL0H/Jtv.m3u8?id=' . $item['denver_id'] . '|User-Agent=Denver1769' . PHP_EOL;
     }
 }
@@ -193,7 +193,7 @@ foreach ($data['data']['channels'] as $channel) {
 }
 echo $m3uContent;
 
-foreach ($json as $jio_channel) {
+/* foreach ($json as $jio_channel) {
     $channel_id   = $jio_channel['channel_id'];
     $channel_name = $jio_channel['channel_name'];
     $channel_logo = $jio_channel['logoUrl'];
@@ -205,7 +205,7 @@ foreach ($json as $jio_channel) {
 
     echo "#EXTINF:-1 tvg-id=\"{$channel_id}\" tvg-name=\"{$channel_name}\" tvg-logo=\"{$channel_logo}\" group-title=\"{$channel_genre}\", {$channel_name}\n";
     echo "{$channel_live_url}\n\n";
-}
+} */
 
 $arjunjson = preg_replace(
     '/tvg-logo\s*=\s*"https:\/\/yt3\.googleusercontent\.com\/GJVGgzRXxK1FDoUpC8ztBHPu81PMnhc8inodKtEckH-rykiYLzg93HUQIoTIirwORynozMkR=s900-c-k-c0x00ffffff-no-rj"/',
